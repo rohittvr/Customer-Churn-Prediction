@@ -23,7 +23,7 @@ from reportlab.lib.enums import TA_CENTER
 # -------------------------------------------------------
 # CONFIG
 # -------------------------------------------------------
-st.set_page_config(page_title="Churn Analytics System", layout="wide")
+st.set_page_config(page_title="Customer Churn Prediction", layout="wide")
 
 
 # -------------------------------------------------------
@@ -322,3 +322,4 @@ else:
         )
 
         st.plotly_chart(fig, use_container_width=True)
+
