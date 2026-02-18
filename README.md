@@ -107,7 +107,7 @@ customer-churn-dashboard/
 
 ---
 
-## ⚙️ Run Locally
+## Run Locally
 
 ### Clone Repository
 
@@ -130,7 +130,7 @@ http://localhost:8501
 
 ---
 
-## 📄 Executive Reporting
+## Executive Reporting
 
 The application generates a professional PDF report including:
 
@@ -141,7 +141,7 @@ The application generates a professional PDF report including:
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - Confusion Matrix and ROC Curve dashboard
 - SHAP-based model explainability
@@ -152,7 +152,7 @@ The application generates a professional PDF report including:
 
 ---
 
-## 👤 Author
+## Author
 
 Rajput Rohit  
 Artificial Intelligence & Machine Learning  
