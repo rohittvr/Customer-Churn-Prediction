@@ -98,7 +98,7 @@ def preprocess_data(df):
 # -------------------------------------------------------
 # PDF GENERATION
 # -------------------------------------------------------
-def generate_pdf(prediction, proba, fig, gauge):
+def generate_pdf(prediction, proba):
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer)
     elements = []
@@ -131,18 +131,19 @@ def generate_pdf(prediction, proba, fig, gauge):
     elements.append(table)
     elements.append(Spacer(1, 0.4 * inch))
 
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp1:
-        fig.write_image(tmp1.name)
-        elements.append(Image(tmp1.name, width=400, height=300))
+    interpretation = (
+        "The model predicts a high risk of churn. Immediate retention strategies are recommended."
+        if prediction == 1 else
+        "The customer shows low churn probability. Continue engagement strategies."
+    )
 
-    elements.append(Spacer(1, 0.4 * inch))
-
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp2:
-        gauge.write_image(tmp2.name)
-        elements.append(Image(tmp2.name, width=400, height=300))
+    elements.append(Paragraph("Risk Interpretation:", styles["Heading3"]))
+    elements.append(Spacer(1, 0.2 * inch))
+    elements.append(Paragraph(interpretation, styles["Normal"]))
 
     doc.build(elements)
     return buffer.getvalue()
+
 
 
 # -------------------------------------------------------
@@ -241,7 +242,8 @@ if page == "Single Prediction":
             ))
             st.plotly_chart(gauge, use_container_width=True)
 
-        pdf_data = generate_pdf(prediction, proba, fig, gauge)
+        pdf_data = generate_pdf(prediction, proba)
+
 
         st.download_button(
             "Download Executive PDF Report",
